@@ -2,6 +2,8 @@
 
 Tool to take the output of the chrome extension [Libby Audiobook Exporter](https://chromewebstore.google.com/detail/libby-audiobook-exporter/ophjgobioamjpkoahcmlofkdbpfjodig) and combine it into a single mp3 file with embedded metadata.
 
+The final output of this file works great with Plex and the Prologue ios app.
+
 ## Usage
 
 - Use Libby Audiobook Exporter to obtain a folder with audiobook files.
