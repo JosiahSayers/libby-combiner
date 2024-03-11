@@ -7,5 +7,5 @@ The final output of this file works great with Plex and the Prologue ios app.
 ## Usage
 
 - Use Libby Audiobook Exporter to obtain a folder with audiobook files.
-- Download the latest release of Libby Combiner from https://github.com/JosiahSayers/libby-combiner/releases
+- Download the latest release of Libby Combiner from https://github.com/JosiahSayers/libby-combiner/releases/latest
 - Open a terminal and run the program `./libby-combiner "/path/to/libby-audiobook-exporter/folder"`
