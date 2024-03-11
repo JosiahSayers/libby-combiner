@@ -1,15 +1,9 @@
-# libby-parser
+# Libby Combiner
 
-To install dependencies:
+Tool to take the output of the chrome extension [Libby Audiobook Exporter](https://chromewebstore.google.com/detail/libby-audiobook-exporter/ophjgobioamjpkoahcmlofkdbpfjodig) and combine it into a single mp3 file with embedded metadata.
 
-```bash
-bun install
-```
+## Usage
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.0.30. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+- Use Libby Audiobook Exporter to obtain a folder with audiobook files.
+- Download the latest release of Libby Combiner from https://github.com/JosiahSayers/libby-combiner/releases
+- Open a terminal and run the program `./libby-combiner "/path/to/libby-audiobook-exporter/folder"`
