@@ -29,7 +29,7 @@ async function validateFfmpegPresence() {
 }
 
 async function writeFileList(directory: string, files: string[]) {
-  const lines = files.map((file) => `file '${file}'`);
+  const lines = files.map((file) => `file '${file.replace(/'/g, "'\\''")}'`);
   return Bun.write(join(directory, "files.txt"), lines.join("\n"));
 }
 
