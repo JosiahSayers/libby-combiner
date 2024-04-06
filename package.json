@@ -1,5 +1,8 @@
 {
   "name": "libby-parser",
+  "scripts": {
+    "compile": "bun build ./index.ts --compile --outfile libby-combiner"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
