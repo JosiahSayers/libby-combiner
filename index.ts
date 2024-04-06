@@ -2,6 +2,7 @@ import { combineAudioFiles } from "./src/combine";
 import { gatherAudioFiles } from "./src/gather";
 import { readOpenbook } from "./src/read-openbook";
 import { validateDirectory } from "./src/validate-directory";
+import { writeDurations } from "./src/write-duration";
 import { writeMetadata } from "./src/write-metadata";
 import { join } from "node:path";
 
@@ -11,6 +12,8 @@ const files = await validateDirectory(directory);
 // Gather mp3 files metadata
 const audioFiles = await gatherAudioFiles(directory, files);
 console.log(`Found ${Object.keys(audioFiles).length} mp3 files`);
+
+await writeDurations(directory, audioFiles);
 
 // Parse openbook.json
 const openbook = await readOpenbook(directory, audioFiles);

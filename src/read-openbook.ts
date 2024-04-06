@@ -13,9 +13,9 @@ export interface OpenBook {
 interface Chapter {
   title: string;
   startTimeMs: number;
+  endTimeMs?: number;
   startTime: string;
   podWiseTimestamp: string;
-  durationMs: number;
 }
 
 export async function readOpenbook(
@@ -43,24 +43,33 @@ function getCreator(data: any, creatorType: "author" | "narrator") {
 }
 
 function getChapters(data: any, audioFiles: AudioFile[]) {
-  const chapters = data?.nav?.toc ?? [];
+  const chapters: any[] = data?.nav?.toc ?? [];
   const reg = /Part\d*/;
-  const mappedChapters = chapters.map((chapter: any) => {
-    const part = chapter.path.match(reg)[0];
-    const chapterStartInFile = getChapterStartTime(chapter.path);
-    const audioFile = audioFiles.find((file) => file.filename.includes(part));
-    const chapterStart = (audioFile?.startTime ?? 0) + chapterStartInFile;
-    const startTime = formatStart(chapterStart / 1000);
-    const podWiseTimestamp = `${startTime} ${chapter.title}`;
+  const mappedChapters = chapters
+    .map((chapter: any) => {
+      const part = chapter.path.match(reg)[0];
+      const chapterStartInFile = getChapterStartTime(chapter.path);
+      const audioFile = audioFiles.find((file) => file.filename.includes(part));
+      const chapterStart = (audioFile?.startTime ?? 0) + chapterStartInFile;
+      const startTime = formatStart(chapterStart / 1000);
+      const podWiseTimestamp = `${startTime} ${chapter.title}`;
 
-    return {
-      title: chapter.title,
-      startTimeMs: chapterStart,
-      startTime,
-      podWiseTimestamp,
-      durationMs: audioFile?.duration,
-    };
-  });
+      return {
+        title: chapter.title,
+        startTimeMs: chapterStart,
+        startTime,
+        podWiseTimestamp,
+      };
+    })
+    .map((chapter, index, chapters) => {
+      const nextChapter = chapters[index + 1];
+      const endTimeMs = nextChapter ? nextChapter.startTimeMs : undefined;
+
+      return {
+        ...chapter,
+        endTimeMs,
+      };
+    });
 
   return mappedChapters;
 }

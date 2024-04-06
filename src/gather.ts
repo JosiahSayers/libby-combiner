@@ -1,6 +1,6 @@
-import getDuration from "get-mp3-duration";
 import { join } from "node:path";
 import { findAudioFiles } from "./util/filename-parser";
+import { getDuration } from "./util/get-mp3-duration";
 
 export interface AudioFile {
   filename: string;
@@ -38,8 +38,6 @@ function getPart(filename: string) {
 
 async function readFile(directory: string, filename: string) {
   const path = join(directory, filename);
-  const file = Bun.file(path);
-  const arrayBuffer = await file.arrayBuffer();
-  const duration = getDuration(Buffer.from(arrayBuffer));
+  const duration = await getDuration(path);
   return { duration, filename };
 }
